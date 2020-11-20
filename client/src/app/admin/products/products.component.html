@@ -1,0 +1,80 @@
+<section>
+  <div class="container">      
+    <div class="row">
+      <div *ngIf="error" class="alert alert-danger text-center">
+        <strong >{{err}} </strong>
+     </div>
+      <div *ngIf="success" class="alert alert-success text-center">
+        <strong >{{success}} </strong>
+      </div>
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 ">
+        <a class="btn btn-warning " (click) ="showEditModal()">add Product</a>
+    </div>
+    <div class="col-xs-12 col-sm-12 col-lg-12">
+      <div class="row media" *ngFor ="let item of products">
+        <div class="col-xs-12 col-sm-6 col-md-3">
+          <figure>
+              <a><img src = "{{item?.img}}" class="image-style"></a> 
+          </figure>
+        </div>
+        <div class="col-md-6 info">
+              <div class="col-xs-12"><h4>Name:{{item?.name}}</h4></div>
+              <div class="col-md-12"><h4>Quantity : {{item?.quantity}}</h4></div>
+              <div class="col-md-12"><h4>price:${{item?.price}}</h4></div>           
+        </div>               
+        <div class="col-md-3">
+          <button class="btn btn-warning btn-block" (click)= "deleteProduct(item)">Remove</button>
+        </div>
+        <div class="col-md-3">
+          <button class="btn btn-warning btn-block" (click)= "showEditModal(item)">Edit</button>
+        </div>
+      </div>
+    </div>
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</section>
+<div class="modal fade " id="quickView" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+          <h4 class="modal-title" id="exampleModalLabel">Edit product
+          <button type="button" class="close pull-right" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+        </h4>
+        
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div *ngIf="errmodal" class="alert alert-danger text-center">
+            <strong >{{errmodal}} </strong>
+          </div>
+          <div class="col-md-6">
+            <label for="name">Name</label>
+            <input name="name" type="text" class="form-control" value="{{ name }}" (change)="handleInputChange('name',$event.target.value)">
+          </div>
+          <div class="col-md-6">
+            <label for="price">Product Price</label>
+            <input name="price" class="form-control" value="{{ price }}" (change)="handleInputChange('price',$event.target.value)">
+          </div>
+          <div class="col-md-6">
+            <label for="quantity">Product Quantity</label>
+            <input name="quantity" class="form-control" value="{{ quantity }}" (change)="handleInputChange('quantity',$event.target.value)">
+          </div>
+          <div class="col-md-6">
+            <label for="img">Product Image</label>
+            <input name="img" type="file" accept='image/*' class="form-control ddd" (change)="handleInputChange('img_file',$event.target.files)">
+          </div>
+          <div class="col-md-6 pt-5">
+            <a (click) ="Saveproduct()" class="btn btn-block btn-warning optionBtn"><i class="fa fa-lock" aria-hidden="true"  id="log"></i>Save data</a>     
+          </div> 
+          <div class="col-md-6 pt-5">
+            <a (click) ="closeModal()" class="btn btn-block btn-warning optionBtn">Cancel</a>
+          </div>
+               
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

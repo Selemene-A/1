@@ -1,0 +1,40 @@
+<section>
+  <div class="container">      
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 col-lg-12">
+        <div *ngIf="qtyNotSelected" class="alert alert-danger">
+            <strong>OOPS ! Please choose quantity before adding this item to the cart. </strong>
+        </div>
+        <div *ngIf="itemAdded" class="alert alert-success">
+            <strong>Item has been successfully added to the cart.</strong>
+        </div>
+        <div class="row name-price">
+          <div class="col-md-4">
+              <figure>
+                <img class="img-responsive" src="{{slicedObject?.img}}">
+            </figure>
+          </div>
+          <div class="col-xs-12 col-sm-12 col-md-8 ">
+            <div class="row">
+              <div class="col-12"> 
+                <h4 class="=">{{slicedObject?.name}}</h4>
+                <h4 class="">Price :$ {{slicedObject?.price}}</h4>
+              </div>
+              <div class="col-lg-12 ">
+                <div class=" margin-top select">
+                  <select #corporation [(ngModel)]="selectedValue" class="form-control inputstl" id="gender1">
+                      <option value="0">-- Quantity --</option>
+                      <option  *ngFor = "let qty of quantities" value = "{{qty}}">{{qty}}</option>                                                   
+                  </select>          
+                </div>
+                <div class="name text-center padding-bottom">
+                  <a class ="btn btn-block btn-warning" (click) = "addToCart()"><i (click) = "addToCart()" class="fa fa-shopping-bag" aria-hidden="true"></i> Add to cart</a>                                                   
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

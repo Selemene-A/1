@@ -1,0 +1,71 @@
+<section>
+  <div class="container">      
+    <div class="row">
+      <div *ngIf="error" class="alert alert-danger text-center">
+        <strong >{{error}} </strong>
+     </div>
+      <div *ngIf="success" class="alert alert-success text-center">
+        <strong >{{success}} </strong>
+      </div>
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 ">
+        <a class="btn btn-warning " (click) ="showEditModal()">add User</a>
+    </div>
+    <div class="col-xs-12 col-sm-12 col-lg-12">
+      <div   *ngFor ="let item of users" >
+        <div class="row media" *ngIf="item.email !== 'larastar721@gmail.com'">
+          <div class="col-md-9">
+            <h4>{{item?.name}}</h4>
+            <h4>email : {{item?.email}}</h4>
+          </div>  
+          <div class="col-md-3">
+            <button class="btn btn-warning btn-block" (click)= "deleteUser(item)">Remove</button>
+            <button class="btn btn-warning btn-block" (click)= "showEditModal(item)">Edit</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</section>
+<div class="modal fade " id="quickView" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+          <h4 class="modal-title" id="exampleModalLabel">Edit User
+          <button type="button" class="close pull-right" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+        </h4>
+
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div *ngIf="errormodal" class="alert alert-danger text-center">
+            <strong >{{errormodal}} </strong>
+          </div>
+          <div class="col-md-6">
+            <label for="name">Name</label>
+            <input name="name" type="text" class="form-control" value="{{ name }}" (change)="handleInputChange('name',$event.target.value)">
+          </div>
+          <div class="col-md-6">
+            <label for="email">email</label>
+            <input name="email" class="form-control" value="{{ email }}" (change)="handleInputChange('email',$event.target.value)">
+          </div>
+          <div class="col-md-12">
+            <label for="password">password</label>
+            <input name="password" type="password" class="form-control" value="{{ password }}" (change)="handleInputChange('password',$event.target.value)">
+          </div>
+          
+          <div class="col-md-6 pt-5">
+            <a (click) ="saveUser()" class="btn btn-block btn-warning optionBtn"><i class="fa fa-lock" aria-hidden="true"  id="log"></i>Save data</a>     
+          </div> 
+          <div class="col-md-6 pt-5">
+            <a (click) ="closeModal()" class="btn btn-block btn-warning optionBtn">Cancel</a>
+          </div>
+               
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
